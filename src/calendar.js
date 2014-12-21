@@ -158,7 +158,8 @@ angular.module('ui.calendar', [])
           angular.extend(config, calendarSettings);
          
           angular.forEach(config, function(value,key){
-            if (typeof value === 'function'){
+            //wrap all but resourceFilter method (used by seankenny's fullcalendar fork)
+            if ( typeof value === 'function' && ['resourceFilter'].indexOf(key) === -1 ) {
               config[key] = wrapFunctionWithScopeApply(config[key]);
             }
           });
